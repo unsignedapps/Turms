@@ -10,6 +10,13 @@
 		E8D1DBE21BEC6A7500AC57F5 /* Turms.h in Headers */ = {isa = PBXBuildFile; fileRef = E8D1DBE11BEC6A7500AC57F5 /* Turms.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E8D1DBE91BEC6A7500AC57F5 /* Turms.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8D1DBDE1BEC6A7500AC57F5 /* Turms.framework */; };
 		E8D1DBEE1BEC6A7500AC57F5 /* TurmsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D1DBED1BEC6A7500AC57F5 /* TurmsTests.swift */; };
+		E8D1DBF91BEC6A8D00AC57F5 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D1DBF81BEC6A8D00AC57F5 /* Message.swift */; };
+		E8D1DBFB1BEC6A9500AC57F5 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D1DBFA1BEC6A9500AC57F5 /* MessageView.swift */; };
+		E8D1DC021BEC6B3700AC57F5 /* TSBlurView.h in Headers */ = {isa = PBXBuildFile; fileRef = E8D1DBFC1BEC6B3700AC57F5 /* TSBlurView.h */; };
+		E8D1DC041BEC6B3700AC57F5 /* TSMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = E8D1DBFE1BEC6B3700AC57F5 /* TSMessage.h */; };
+		E8D1DC061BEC6B3700AC57F5 /* TSMessageView.h in Headers */ = {isa = PBXBuildFile; fileRef = E8D1DC001BEC6B3700AC57F5 /* TSMessageView.h */; };
+		E8D1DC0C1BEC715A00AC57F5 /* MessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D1DC0B1BEC715A00AC57F5 /* MessageController.swift */; };
+		E8D1DC111BEC7D7B00AC57F5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8D1DC101BEC7D7B00AC57F5 /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +36,16 @@
 		E8D1DBE81BEC6A7500AC57F5 /* TurmsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TurmsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8D1DBED1BEC6A7500AC57F5 /* TurmsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurmsTests.swift; sourceTree = "<group>"; };
 		E8D1DBEF1BEC6A7500AC57F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E8D1DBF81BEC6A8D00AC57F5 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		E8D1DBFA1BEC6A9500AC57F5 /* MessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		E8D1DBFC1BEC6B3700AC57F5 /* TSBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSBlurView.h; path = "../../Downloads/TSMessages-master/Pod/Classes/TSBlurView.h"; sourceTree = "<group>"; };
+		E8D1DBFD1BEC6B3700AC57F5 /* TSBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSBlurView.m; path = "../../Downloads/TSMessages-master/Pod/Classes/TSBlurView.m"; sourceTree = "<group>"; };
+		E8D1DBFE1BEC6B3700AC57F5 /* TSMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSMessage.h; path = "../../Downloads/TSMessages-master/Pod/Classes/TSMessage.h"; sourceTree = "<group>"; };
+		E8D1DBFF1BEC6B3700AC57F5 /* TSMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSMessage.m; path = "../../Downloads/TSMessages-master/Pod/Classes/TSMessage.m"; sourceTree = "<group>"; };
+		E8D1DC001BEC6B3700AC57F5 /* TSMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSMessageView.h; path = "../../Downloads/TSMessages-master/Pod/Classes/TSMessageView.h"; sourceTree = "<group>"; };
+		E8D1DC011BEC6B3700AC57F5 /* TSMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSMessageView.m; path = "../../Downloads/TSMessages-master/Pod/Classes/TSMessageView.m"; sourceTree = "<group>"; };
+		E8D1DC0B1BEC715A00AC57F5 /* MessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageController.swift; sourceTree = "<group>"; };
+		E8D1DC101BEC7D7B00AC57F5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,8 +71,15 @@
 			isa = PBXGroup;
 			children = (
 				E8D1DBE01BEC6A7500AC57F5 /* Turms */,
+				E8D1DC0F1BEC7D6C00AC57F5 /* Supporting Files */,
 				E8D1DBEC1BEC6A7500AC57F5 /* TurmsTests */,
 				E8D1DBDF1BEC6A7500AC57F5 /* Products */,
+				E8D1DBFC1BEC6B3700AC57F5 /* TSBlurView.h */,
+				E8D1DBFD1BEC6B3700AC57F5 /* TSBlurView.m */,
+				E8D1DBFE1BEC6B3700AC57F5 /* TSMessage.h */,
+				E8D1DBFF1BEC6B3700AC57F5 /* TSMessage.m */,
+				E8D1DC001BEC6B3700AC57F5 /* TSMessageView.h */,
+				E8D1DC011BEC6B3700AC57F5 /* TSMessageView.m */,
 			);
 			sourceTree = "<group>";
 		};
@@ -73,6 +97,9 @@
 			children = (
 				E8D1DBE11BEC6A7500AC57F5 /* Turms.h */,
 				E8D1DBE31BEC6A7500AC57F5 /* Info.plist */,
+				E8D1DBF81BEC6A8D00AC57F5 /* Message.swift */,
+				E8D1DBFA1BEC6A9500AC57F5 /* MessageView.swift */,
+				E8D1DC0B1BEC715A00AC57F5 /* MessageController.swift */,
 			);
 			path = Turms;
 			sourceTree = "<group>";
@@ -86,6 +113,14 @@
 			path = TurmsTests;
 			sourceTree = "<group>";
 		};
+		E8D1DC0F1BEC7D6C00AC57F5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E8D1DC101BEC7D7B00AC57F5 /* Images.xcassets */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -93,7 +128,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8D1DC061BEC6B3700AC57F5 /* TSMessageView.h in Headers */,
+				E8D1DC041BEC6B3700AC57F5 /* TSMessage.h in Headers */,
 				E8D1DBE21BEC6A7500AC57F5 /* Turms.h in Headers */,
+				E8D1DC021BEC6B3700AC57F5 /* TSBlurView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,6 +215,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8D1DC111BEC7D7B00AC57F5 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,6 +233,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8D1DC0C1BEC715A00AC57F5 /* MessageController.swift in Sources */,
+				E8D1DBFB1BEC6A9500AC57F5 /* MessageView.swift in Sources */,
+				E8D1DBF91BEC6A8D00AC57F5 /* Message.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,6 +350,7 @@
 		E8D1DBF31BEC6A7500AC57F5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -318,12 +361,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.unsignedapps.Turms;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		E8D1DBF41BEC6A7500AC57F5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -376,6 +421,7 @@
 				E8D1DBF41BEC6A7500AC57F5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E8D1DBF51BEC6A7500AC57F5 /* Build configuration list for PBXNativeTarget "TurmsTests" */ = {
 			isa = XCConfigurationList;
@@ -384,6 +430,7 @@
 				E8D1DBF71BEC6A7500AC57F5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
