@@ -40,6 +40,8 @@ public struct Message: Equatable
     public var dismissable: Bool
     
     public var animationDuration: NSTimeInterval = 0.34
+    public var displayTimeBase: NSTimeInterval = 1.5
+    public var displayTimePerPixel: NSTimeInterval = 0.03
 
     public init (type: MessageType, message: String)
     {

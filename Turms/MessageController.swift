@@ -111,12 +111,11 @@ class MessageOperation: NSOperation
     func show ()
     {
         // find the current window
-        guard let controller = UIApplication.sharedApplication().keyWindow?.rootViewController else { self.cancel(); return; }
+        guard let controller = UIApplication.sharedApplication().keyWindow?.rootViewController?.presentedViewController ?? UIApplication.sharedApplication().keyWindow?.rootViewController else { self.cancel(); return; }
         
         // handle cases where we are a nav bar
         dispatch_async(dispatch_get_main_queue())
         {
-            self.configureDismissal();
             if let nav = controller as? UINavigationController
             {
                 controller.view.insertSubview(self.view, aboveSubview: nav.navigationBar);
@@ -125,6 +124,7 @@ class MessageOperation: NSOperation
                 controller.view.addSubview(self.view);
             }
             controller.view.layoutIfNeeded();                   // The first layout pass is to get the bounds calculated
+            self.configureDismissal();
             
             // align it off screen
             if let constraint = self.view.topConstraint, message = self.view.message
@@ -149,7 +149,8 @@ class MessageOperation: NSOperation
         // configure for automatic dismissal
         if message.duration == .Automatic
         {
-            self.timer = NSTimer.scheduledTimerWithTimeInterval(10.0, target: self, selector: Selector("hide"), userInfo: nil, repeats: false);
+            let displayTime = message.displayTimeBase + (message.displayTimePerPixel * Double(CGRectGetHeight(self.view.frame)));
+            self.timer = NSTimer.scheduledTimerWithTimeInterval(displayTime, target: self, selector: Selector("hide"), userInfo: nil, repeats: false);
         }
         
         // tap to dismiss

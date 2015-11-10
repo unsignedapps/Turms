@@ -11,7 +11,7 @@ import UIKit
 class MessageView: UIView
 {
     let message: Message?
-    private var stackView: UIView? = nil
+    private var stackView: UIStackView? = nil
     private var backgroundView: UIView? = nil
     
     private var titleLabel: UILabel? = nil
@@ -79,14 +79,20 @@ class MessageView: UIView
         self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[view]|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: nil, views: ["view": background]));
         self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[view]|", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: nil, views: ["view": background]));
         
+        // our expected label width
+        let rect = CGRectIsEmpty(self.frame) ? self.superview!.frame : self.frame;
+        let width: CGFloat = stack.subviews.count == 1 ? CGRectGetWidth(rect) - self.padding.left - self.padding.right : CGRectGetWidth(rect) - self.padding.left - self.padding.right - stack.spacing - CGRectGetWidth(stack.subviews[0].frame);
+        
         // The Title Label
         if let label = self.titleLabel
         {
-            label.addConstraint(NSLayoutConstraint(item: label, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .Height, multiplier: 1.0, constant: CGRectGetHeight(label.boundingRectForContents())));
+            label.addConstraint(NSLayoutConstraint(item: label, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .Width, multiplier: 1.0, constant: width));
+            label.addConstraint(NSLayoutConstraint(item: label, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .Height, multiplier: 1.0, constant: ceil(CGRectGetHeight(label.boundingRectForContents(width)))));
         }
         if let label = self.subtitleLabel
         {
-            label.addConstraint(NSLayoutConstraint(item: label, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .Height, multiplier: 1.0, constant: CGRectGetHeight(label.boundingRectForContents())));
+            label.addConstraint(NSLayoutConstraint(item: label, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .Width, multiplier: 1.0, constant: width));
+            label.addConstraint(NSLayoutConstraint(item: label, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .Height, multiplier: 1.0, constant: ceil(CGRectGetHeight(label.boundingRectForContents(width)))));
         }
         
         super.updateConstraints();
@@ -110,6 +116,7 @@ extension MessageView
     private func titleLabel (message: Message) -> UILabel
     {
         let label = UILabel();
+        label.translatesAutoresizingMaskIntoConstraints = false;
         label.text = message.title;
         label.textColor = message.textColor;
         label.numberOfLines = 0;
@@ -117,6 +124,10 @@ extension MessageView
         label.font = UIFont.boldSystemFontOfSize(message.titleFontSize)
         label.shadowOffset = message.shadowOffset;
         label.textAlignment = .Left;
+        
+        // compression resistence
+        label.setContentCompressionResistancePriority(UILayoutPriorityRequired, forAxis: .Vertical);
+        label.setContentCompressionResistancePriority(UILayoutPriorityRequired, forAxis: .Horizontal);
         return label;
     }
     
@@ -125,6 +136,7 @@ extension MessageView
         guard let subtitle = message.subtitle else { return nil; }
         
         let label = UILabel();
+        label.translatesAutoresizingMaskIntoConstraints = false;
         label.text = subtitle;
         label.numberOfLines = 0;
         label.textColor = message.textColor;
@@ -132,6 +144,11 @@ extension MessageView
         label.font = UIFont.systemFontOfSize(message.contentFontSize)
         label.shadowOffset = message.shadowOffset;
         label.textAlignment = .Left;
+        
+        // compression resistence
+        label.setContentCompressionResistancePriority(UILayoutPriorityRequired, forAxis: .Vertical);
+        label.setContentCompressionResistancePriority(UILayoutPriorityRequired, forAxis: .Horizontal);
+
         return label;
     }
     
@@ -182,12 +199,12 @@ extension UIEdgeInsets
 
 extension UILabel
 {
-    func boundingRectForContents () -> CGRect
+    func boundingRectForContents (width: CGFloat) -> CGRect
     {
         if let text = self.text
         {
             let attributes = [ NSFontAttributeName: self.font ];
-            return text.boundingRectWithSize(CGSizeMake(CGRectGetWidth(self.frame), 2000), options: .UsesLineFragmentOrigin, attributes: attributes, context: nil);
+            return text.boundingRectWithSize(CGSizeMake(width, 2000), options: .UsesLineFragmentOrigin, attributes: attributes, context: nil);
         }
         
         return CGRectZero;
