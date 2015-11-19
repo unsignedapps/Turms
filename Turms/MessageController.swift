@@ -111,7 +111,12 @@ class MessageOperation: NSOperation
     func show ()
     {
         // find the current window
-        guard let controller = UIApplication.sharedApplication().keyWindow?.rootViewController?.presentedViewController ?? UIApplication.sharedApplication().keyWindow?.rootViewController else { self.cancel(); return; }
+        guard var controller = UIApplication.sharedApplication().keyWindow?.rootViewController?.presentedViewController ?? UIApplication.sharedApplication().keyWindow?.rootViewController else { self.cancel(); return; }
+        
+        // hang on, are we being dismissed?
+        if controller.isBeingDismissed() {
+            controller = controller.presentingViewController ?? controller
+        }
         
         // handle cases where we are a nav bar
         dispatch_async(dispatch_get_main_queue())
