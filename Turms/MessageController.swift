@@ -35,9 +35,9 @@ public class MessageController: NSObject
         self.show(Message(type: type, message: message));
     }
     
-    public static func show (type: MessageType, title: String, subtitle: String? = nil, duration: MessageDuration = .Automatic, image: UIImage? = nil, position: MessagePosition = .NavBarOverlay, dismissable: Bool = true)
+    public static func show (type: MessageType, title: String, subtitle: String? = nil, duration: MessageDuration = .Automatic, image: UIImage? = nil, position: MessagePosition = .NavBarOverlay, dismissible: Bool = true)
     {
-        self.show(Message(type: type, title: title, subtitle: subtitle, duration: duration, image: image, position: position, dismissable: dismissable));
+        self.show(Message(type: type, title: title, subtitle: subtitle, duration: duration, image: image, position: position, dismissible: dismissible));
     }
 }
 
@@ -159,7 +159,7 @@ class MessageOperation: NSOperation
         }
         
         // tap to dismiss
-        if message.dismissable
+        if message.dismissible
         {
             let recognizer = UITapGestureRecognizer(target: self, action: Selector("hide"));
             self.tapGestureRecognizer = recognizer;

@@ -37,7 +37,7 @@ public struct Message: Equatable
     public var duration: MessageDuration
     public var image: UIImage?
     public var position: MessagePosition
-    public var dismissable: Bool
+    public var dismissible: Bool
     
     public var animationDuration: NSTimeInterval = 0.34
     public var displayTimeBase: NSTimeInterval = 1.5
@@ -48,7 +48,7 @@ public struct Message: Equatable
         self.init(type: type, title: message);
     }
 
-    public init (type: MessageType, title: String, subtitle: String? = nil, duration: MessageDuration = .Automatic, image: UIImage? = nil, position: MessagePosition = .NavBarOverlay, dismissable: Bool = true)
+    public init (type: MessageType, title: String, subtitle: String? = nil, duration: MessageDuration = .Automatic, image: UIImage? = nil, position: MessagePosition = .NavBarOverlay, dismissible: Bool = true)
     {
         self.type = type;
         self.title = title;
@@ -56,7 +56,7 @@ public struct Message: Equatable
         self.duration = duration;
         self.image = image;
         self.position = position;
-        self.dismissable = dismissable;
+        self.dismissible = dismissible;
     }
 
     var backgroundColor: UIColor
