@@ -1,8 +1,10 @@
 Pod::Spec.new do |s|
   s.name         = "Turms"
   s.version      = "1.0"
-  s.summary      = "Turms is a limited port of TSMessages to Swift"
+  s.summary      = "Turms is a limited port of TSMessages to Swift."
   s.description  = <<-DESC
+                  Turms is a limited port of TSMessages to Swift.
+                  At present, it supports only the "over navigation bar" style.
                    DESC
   s.homepage     = "https://github.com/unsignedapps/Turms"
   s.license      = "MIT"
