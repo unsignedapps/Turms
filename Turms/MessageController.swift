@@ -23,21 +23,21 @@ public class MessageController: NSObject
         super.init();
     }
 
-    public static func show (message: Message)
+    public static func show (message: Message, controller: UIViewController)
     {
         let view = MessageView(message: message);
-        let op = MessageOperation(view: view);
+        let op = MessageOperation(view: view, controller: controller);
         self.sharedInstance.queue.addOperation(op);
     }
     
-    public static func show (type type: MessageType, message: String)
+    public static func show (type type: MessageType, message: String, controller: UIViewController)
     {
-        self.show(Message(type: type, message: message));
+        self.show(Message(type: type, message: message), controller: controller);
     }
     
-    public static func show (type: MessageType, title: String, subtitle: String? = nil, duration: MessageDuration = .Automatic, image: UIImage? = nil, position: MessagePosition = .NavBarOverlay, dismissible: Bool = true)
+    public static func show (type: MessageType, title: String, subtitle: String? = nil, duration: MessageDuration = .Automatic, image: UIImage? = nil, position: MessagePosition = .NavBarOverlay, dismissible: Bool = true, controller: UIViewController)
     {
-        self.show(Message(type: type, title: title, subtitle: subtitle, duration: duration, image: image, position: position, dismissible: dismissible));
+        self.show(Message(type: type, title: title, subtitle: subtitle, duration: duration, image: image, position: position, dismissible: dismissible), controller: controller);
     }
 }
 
@@ -53,6 +53,7 @@ class MessageOperation: NSOperation
     private let view: MessageView;
     private var tapGestureRecognizer: UITapGestureRecognizer? = nil
     private var timer: NSTimer? = nil
+    private let controller: UIViewController
     
     private var _cancelled: Bool = false
     {
@@ -96,9 +97,10 @@ class MessageOperation: NSOperation
         get { return true; }
     }
     
-    init(view: MessageView)
+    init(view: MessageView, controller: UIViewController)
     {
         self.view = view;
+        self.controller = controller;
         super.init();
     }
     
@@ -110,10 +112,8 @@ class MessageOperation: NSOperation
     
     func show ()
     {
-        // find the current window
-        guard var controller = UIApplication.sharedApplication().keyWindow?.rootViewController?.presentedViewController ?? UIApplication.sharedApplication().keyWindow?.rootViewController else { self.cancel(); return; }
-        
         // hang on, are we being dismissed?
+        var controller = self.controller;
         if controller.isBeingDismissed() {
             controller = controller.presentingViewController ?? controller
         }
