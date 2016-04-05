@@ -155,13 +155,13 @@ class MessageOperation: NSOperation
         if message.duration == .Automatic
         {
             let displayTime = message.displayTimeBase + (message.displayTimePerPixel * Double(CGRectGetHeight(self.view.frame)));
-            self.timer = NSTimer.scheduledTimerWithTimeInterval(displayTime, target: self, selector: Selector("hide"), userInfo: nil, repeats: false);
+            self.timer = NSTimer.scheduledTimerWithTimeInterval(displayTime, target: self, selector: #selector(MessageOperation.hide), userInfo: nil, repeats: false);
         }
         
         // tap to dismiss
         if message.dismissible
         {
-            let recognizer = UITapGestureRecognizer(target: self, action: Selector("hide"));
+            let recognizer = UITapGestureRecognizer(target: self, action: #selector(MessageOperation.hide));
             self.tapGestureRecognizer = recognizer;
             self.view.addGestureRecognizer(recognizer);
         }

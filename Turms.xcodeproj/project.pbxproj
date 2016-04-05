@@ -12,9 +12,6 @@
 		E8D1DBEE1BEC6A7500AC57F5 /* TurmsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D1DBED1BEC6A7500AC57F5 /* TurmsTests.swift */; };
 		E8D1DBF91BEC6A8D00AC57F5 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D1DBF81BEC6A8D00AC57F5 /* Message.swift */; };
 		E8D1DBFB1BEC6A9500AC57F5 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D1DBFA1BEC6A9500AC57F5 /* MessageView.swift */; };
-		E8D1DC021BEC6B3700AC57F5 /* TSBlurView.h in Headers */ = {isa = PBXBuildFile; fileRef = E8D1DBFC1BEC6B3700AC57F5 /* TSBlurView.h */; };
-		E8D1DC041BEC6B3700AC57F5 /* TSMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = E8D1DBFE1BEC6B3700AC57F5 /* TSMessage.h */; };
-		E8D1DC061BEC6B3700AC57F5 /* TSMessageView.h in Headers */ = {isa = PBXBuildFile; fileRef = E8D1DC001BEC6B3700AC57F5 /* TSMessageView.h */; };
 		E8D1DC0C1BEC715A00AC57F5 /* MessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D1DC0B1BEC715A00AC57F5 /* MessageController.swift */; };
 		E8D1DC111BEC7D7B00AC57F5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8D1DC101BEC7D7B00AC57F5 /* Images.xcassets */; };
 /* End PBXBuildFile section */
@@ -38,12 +35,6 @@
 		E8D1DBEF1BEC6A7500AC57F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E8D1DBF81BEC6A8D00AC57F5 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		E8D1DBFA1BEC6A9500AC57F5 /* MessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
-		E8D1DBFC1BEC6B3700AC57F5 /* TSBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSBlurView.h; path = "../../Downloads/TSMessages-master/Pod/Classes/TSBlurView.h"; sourceTree = "<group>"; };
-		E8D1DBFD1BEC6B3700AC57F5 /* TSBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSBlurView.m; path = "../../Downloads/TSMessages-master/Pod/Classes/TSBlurView.m"; sourceTree = "<group>"; };
-		E8D1DBFE1BEC6B3700AC57F5 /* TSMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSMessage.h; path = "../../Downloads/TSMessages-master/Pod/Classes/TSMessage.h"; sourceTree = "<group>"; };
-		E8D1DBFF1BEC6B3700AC57F5 /* TSMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSMessage.m; path = "../../Downloads/TSMessages-master/Pod/Classes/TSMessage.m"; sourceTree = "<group>"; };
-		E8D1DC001BEC6B3700AC57F5 /* TSMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSMessageView.h; path = "../../Downloads/TSMessages-master/Pod/Classes/TSMessageView.h"; sourceTree = "<group>"; };
-		E8D1DC011BEC6B3700AC57F5 /* TSMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSMessageView.m; path = "../../Downloads/TSMessages-master/Pod/Classes/TSMessageView.m"; sourceTree = "<group>"; };
 		E8D1DC0B1BEC715A00AC57F5 /* MessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageController.swift; sourceTree = "<group>"; };
 		E8D1DC101BEC7D7B00AC57F5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -74,12 +65,6 @@
 				E8D1DC0F1BEC7D6C00AC57F5 /* Supporting Files */,
 				E8D1DBEC1BEC6A7500AC57F5 /* TurmsTests */,
 				E8D1DBDF1BEC6A7500AC57F5 /* Products */,
-				E8D1DBFC1BEC6B3700AC57F5 /* TSBlurView.h */,
-				E8D1DBFD1BEC6B3700AC57F5 /* TSBlurView.m */,
-				E8D1DBFE1BEC6B3700AC57F5 /* TSMessage.h */,
-				E8D1DBFF1BEC6B3700AC57F5 /* TSMessage.m */,
-				E8D1DC001BEC6B3700AC57F5 /* TSMessageView.h */,
-				E8D1DC011BEC6B3700AC57F5 /* TSMessageView.m */,
 			);
 			sourceTree = "<group>";
 		};
@@ -128,10 +113,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E8D1DC061BEC6B3700AC57F5 /* TSMessageView.h in Headers */,
-				E8D1DC041BEC6B3700AC57F5 /* TSMessage.h in Headers */,
 				E8D1DBE21BEC6A7500AC57F5 /* Turms.h in Headers */,
-				E8D1DC021BEC6B3700AC57F5 /* TSBlurView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
