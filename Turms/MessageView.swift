@@ -11,20 +11,20 @@ import UIKit
 class MessageView: UIView
 {
     let message: Message?
-    private var stackView: UIStackView? = nil
-    private var backgroundView: UIView? = nil
+    fileprivate var stackView: UIStackView? = nil
+    fileprivate var backgroundView: UIView? = nil
     
-    private var titleLabel: UILabel? = nil
-    private var subtitleLabel: UILabel? = nil
+    fileprivate var titleLabel: UILabel? = nil
+    fileprivate var subtitleLabel: UILabel? = nil
     
-    private let padding = UIEdgeInsets(top: 35.0, left: 30.0, bottom: 15.0, right: 30.0)
+    fileprivate let padding = UIEdgeInsets(top: 35.0, left: 30.0, bottom: 15.0, right: 30.0)
     
     var topConstraint: NSLayoutConstraint? = nil
     
     init (message: Message)
     {
         self.message = message;
-        super.init(frame: CGRectZero);
+        super.init(frame: CGRect.zero);
         
         var views: [UIView] = [];
         if let icon = message.icon
@@ -58,41 +58,41 @@ class MessageView: UIView
     
     override func updateConstraints()
     {
-        guard let stack = self.stackView, background = self.backgroundView else { return }
+        guard let stack = self.stackView, let background = self.backgroundView else { return }
         
         // Ourself
         if let superview = self.superview
         {
-            superview.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[view]|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: nil, views: ["view": self]));
+            superview.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|", options: NSLayoutFormatOptions.alignAllCenterY, metrics: nil, views: ["view": self]));
             
             // top constraint
-            let constraint = NSLayoutConstraint(item: self, attribute: .Top, relatedBy: .Equal, toItem: superview, attribute: .Top, multiplier: 1.0, constant: 0.0);
+            let constraint = NSLayoutConstraint(item: self, attribute: .top, relatedBy: .equal, toItem: superview, attribute: .top, multiplier: 1.0, constant: 0.0);
             superview.addConstraint(constraint);
             self.topConstraint = constraint;
         }
 
         // The Stack
-        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-left-[view]-right-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: self.padding.metricsDictionary(), views: ["view": stack]));
-        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-top-[view]-bottom-|", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: self.padding.metricsDictionary(), views: ["view": stack]));
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-left-[view]-right-|", options: NSLayoutFormatOptions.alignAllCenterY, metrics: self.padding.metricsDictionary(), views: ["view": stack]));
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-top-[view]-bottom-|", options: NSLayoutFormatOptions.alignAllCenterX, metrics: self.padding.metricsDictionary(), views: ["view": stack]));
 
         // The Background
-        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[view]|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: nil, views: ["view": background]));
-        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[view]|", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: nil, views: ["view": background]));
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|", options: NSLayoutFormatOptions.alignAllCenterY, metrics: nil, views: ["view": background]));
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|", options: NSLayoutFormatOptions.alignAllCenterX, metrics: nil, views: ["view": background]));
         
         // our expected label width
-        let rect = CGRectIsEmpty(self.frame) ? self.superview!.frame : self.frame;
-        let width: CGFloat = stack.subviews.count == 1 ? CGRectGetWidth(rect) - self.padding.left - self.padding.right : CGRectGetWidth(rect) - self.padding.left - self.padding.right - stack.spacing - CGRectGetWidth(stack.subviews[0].frame);
+        let rect = self.frame.isEmpty ? self.superview!.frame : self.frame;
+        let width: CGFloat = stack.subviews.count == 1 ? rect.width - self.padding.left - self.padding.right : rect.width - self.padding.left - self.padding.right - stack.spacing - stack.subviews[0].frame.width;
         
         // The Title Label
         if let label = self.titleLabel
         {
-            label.addConstraint(NSLayoutConstraint(item: label, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .Width, multiplier: 1.0, constant: width));
-            label.addConstraint(NSLayoutConstraint(item: label, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .Height, multiplier: 1.0, constant: ceil(CGRectGetHeight(label.boundingRectForContents(width)))));
+            label.addConstraint(NSLayoutConstraint(item: label, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: width));
+            label.addConstraint(NSLayoutConstraint(item: label, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: ceil(label.boundingRectForContents(width).height)));
         }
         if let label = self.subtitleLabel
         {
-            label.addConstraint(NSLayoutConstraint(item: label, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .Width, multiplier: 1.0, constant: width));
-            label.addConstraint(NSLayoutConstraint(item: label, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .Height, multiplier: 1.0, constant: ceil(CGRectGetHeight(label.boundingRectForContents(width)))));
+            label.addConstraint(NSLayoutConstraint(item: label, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: width));
+            label.addConstraint(NSLayoutConstraint(item: label, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: ceil(label.boundingRectForContents(width).height)));
         }
         
         super.updateConstraints();
@@ -113,7 +113,7 @@ class MessageView: UIView
 
 extension MessageView
 {
-    private func titleLabel (message: Message) -> UILabel
+    fileprivate func titleLabel (_ message: Message) -> UILabel
     {
         let label = UILabel();
         label.translatesAutoresizingMaskIntoConstraints = false;
@@ -121,17 +121,17 @@ extension MessageView
         label.textColor = message.textColor;
         label.numberOfLines = 0;
         label.shadowColor = message.shadowColor;
-        label.font = UIFont.boldSystemFontOfSize(message.titleFontSize)
+        label.font = UIFont.boldSystemFont(ofSize: message.titleFontSize)
         label.shadowOffset = message.shadowOffset;
-        label.textAlignment = .Left;
+        label.textAlignment = .left;
         
         // compression resistence
-        label.setContentCompressionResistancePriority(UILayoutPriorityRequired, forAxis: .Vertical);
-        label.setContentCompressionResistancePriority(UILayoutPriorityRequired, forAxis: .Horizontal);
+        label.setContentCompressionResistancePriority(UILayoutPriorityRequired, for: .vertical);
+        label.setContentCompressionResistancePriority(UILayoutPriorityRequired, for: .horizontal);
         return label;
     }
     
-    private func subtitleLabel (message: Message) -> UILabel?
+    fileprivate func subtitleLabel (_ message: Message) -> UILabel?
     {
         guard let subtitle = message.subtitle else { return nil; }
         
@@ -141,45 +141,45 @@ extension MessageView
         label.numberOfLines = 0;
         label.textColor = message.textColor;
         label.shadowColor = message.shadowColor;
-        label.font = UIFont.systemFontOfSize(message.contentFontSize)
+        label.font = UIFont.systemFont(ofSize: message.contentFontSize)
         label.shadowOffset = message.shadowOffset;
-        label.textAlignment = .Left;
+        label.textAlignment = .left;
         
         // compression resistence
-        label.setContentCompressionResistancePriority(UILayoutPriorityRequired, forAxis: .Vertical);
-        label.setContentCompressionResistancePriority(UILayoutPriorityRequired, forAxis: .Horizontal);
+        label.setContentCompressionResistancePriority(UILayoutPriorityRequired, for: .vertical);
+        label.setContentCompressionResistancePriority(UILayoutPriorityRequired, for: .horizontal);
 
         return label;
     }
     
-    private func messageStack (views: [UIView]) -> UIStackView
+    fileprivate func messageStack (_ views: [UIView]) -> UIStackView
     {
         let stack = UIStackView(arrangedSubviews: views);
-        stack.setContentCompressionResistancePriority(UILayoutPriorityRequired, forAxis: .Vertical);
-        stack.alignment = .Leading;
-        stack.distribution = .Fill;
-        stack.axis = .Vertical;
+        stack.setContentCompressionResistancePriority(UILayoutPriorityRequired, for: .vertical);
+        stack.alignment = .leading;
+        stack.distribution = .fill;
+        stack.axis = .vertical;
         stack.spacing = 8.0;
         return stack;
     }
     
-    private func stackView (views: [UIView]) -> UIStackView
+    fileprivate func stackView (_ views: [UIView]) -> UIStackView
     {
         let stack = UIStackView(arrangedSubviews: views);
         stack.translatesAutoresizingMaskIntoConstraints = false;
-        stack.alignment = .Center;
-        stack.axis = .Horizontal;
+        stack.alignment = .center;
+        stack.axis = .horizontal;
         stack.spacing = 15.0;
         return stack;
     }
     
-    private func backgroundView (message: Message) -> UIView
+    fileprivate func backgroundView (_ message: Message) -> UIView
     {
         let background = UIToolbar();
         background.translatesAutoresizingMaskIntoConstraints = false;
         background.barTintColor = message.backgroundColor;
-        background.userInteractionEnabled = false;
-        background.setBackgroundImage(nil, forToolbarPosition: .Any, barMetrics: .Default);
+        background.isUserInteractionEnabled = false;
+        background.setBackgroundImage(nil, forToolbarPosition: .any, barMetrics: .default);
         return background;
     }
 }
@@ -189,24 +189,24 @@ extension UIEdgeInsets
     func metricsDictionary () -> [String: NSNumber]
     {
         return [
-            "top": NSNumber(double: Double(self.top)),
-            "bottom": NSNumber(double: Double(self.bottom)),
-            "left": NSNumber(double: Double(self.left)),
-            "right": NSNumber(double: Double(self.right)),
+            "top": NSNumber(value: Double(self.top) as Double),
+            "bottom": NSNumber(value: Double(self.bottom) as Double),
+            "left": NSNumber(value: Double(self.left) as Double),
+            "right": NSNumber(value: Double(self.right) as Double),
         ];
     }
 }
 
 extension UILabel
 {
-    func boundingRectForContents (width: CGFloat) -> CGRect
+    func boundingRectForContents (_ width: CGFloat) -> CGRect
     {
         if let text = self.text
         {
             let attributes = [ NSFontAttributeName: self.font ];
-            return text.boundingRectWithSize(CGSizeMake(width, 2000), options: .UsesLineFragmentOrigin, attributes: attributes, context: nil);
+            return text.boundingRect(with: CGSize(width: width, height: 2000), options: .usesLineFragmentOrigin, attributes: attributes, context: nil);
         }
         
-        return CGRectZero;
+        return CGRect.zero;
     }
 }
