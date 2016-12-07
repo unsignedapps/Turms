@@ -8,34 +8,34 @@
 
 import UIKit
 
-public class MessageController: NSObject
+open class MessageController: NSObject
 {
     static let sharedInstance = MessageController()
     
-    private let queue: NSOperationQueue
+    fileprivate let queue: OperationQueue
     var delegate: MessageControllerDelegate?
     
     override init()
     {
-        self.queue = NSOperationQueue();
+        self.queue = OperationQueue();
         self.queue.maxConcurrentOperationCount = 1;
 
         super.init();
     }
 
-    public static func show (message: Message, controller: UIViewController)
+    open static func show (_ message: Message, controller: UIViewController)
     {
         let view = MessageView(message: message);
         let op = MessageOperation(view: view, controller: controller);
         self.sharedInstance.queue.addOperation(op);
     }
     
-    public static func show (type type: MessageType, message: String, controller: UIViewController)
+    open static func show (type: MessageType, message: String, controller: UIViewController)
     {
         self.show(Message(type: type, message: message), controller: controller);
     }
     
-    public static func show (type: MessageType, title: String, subtitle: String? = nil, duration: MessageDuration = .Automatic, image: UIImage? = nil, position: MessagePosition = .NavBarOverlay, dismissible: Bool = true, controller: UIViewController)
+    open static func show (_ type: MessageType, title: String, subtitle: String? = nil, duration: MessageDuration = .automatic, image: UIImage? = nil, position: MessagePosition = .navBarOverlay, dismissible: Bool = true, controller: UIViewController)
     {
         self.show(Message(type: type, title: title, subtitle: subtitle, duration: duration, image: image, position: position, dismissible: dismissible), controller: controller);
     }
@@ -43,56 +43,56 @@ public class MessageController: NSObject
 
 protocol MessageControllerDelegate
 {
-    func locationOfView (view: MessageView) -> CGFloat
-    func customise (view: MessageView)
+    func locationOfView (_ view: MessageView) -> CGFloat
+    func customise (_ view: MessageView)
 }
 
 
-class MessageOperation: NSOperation
+class MessageOperation: Operation
 {
-    private let view: MessageView;
-    private var tapGestureRecognizer: UITapGestureRecognizer? = nil
-    private var timer: NSTimer? = nil
-    private let controller: UIViewController
+    fileprivate let view: MessageView;
+    fileprivate var tapGestureRecognizer: UITapGestureRecognizer? = nil
+    fileprivate var timer: Timer? = nil
+    fileprivate let controller: UIViewController
     
-    private var _cancelled: Bool = false
+    fileprivate var _cancelled: Bool = false
     {
-        willSet (value) { self.willChangeValueForKey("isCancelled"); }
-        didSet  (value) { self.didChangeValueForKey("isCancelled"); }
+        willSet (value) { self.willChangeValue(forKey: "isCancelled"); }
+        didSet  (value) { self.didChangeValue(forKey: "isCancelled"); }
         
     }
-    override var cancelled: Bool
+    override var isCancelled: Bool
     {
         get { return self._cancelled; }
     }
     
-    private var _executing: Bool = false
+    fileprivate var _executing: Bool = false
     {
-        willSet (value) { self.willChangeValueForKey("isExecuting"); }
-        didSet  (value) { self.didChangeValueForKey("isExecuting"); }
+        willSet (value) { self.willChangeValue(forKey: "isExecuting"); }
+        didSet  (value) { self.didChangeValue(forKey: "isExecuting"); }
     }
-    override var executing: Bool
+    override var isExecuting: Bool
     {
         get { return self._executing; }
     }
     
-    private var _finished: Bool = false
+    fileprivate var _finished: Bool = false
     {
-        willSet (value) { self.willChangeValueForKey("isFinished"); }
-        didSet  (value) { self.didChangeValueForKey("isFinished"); }
+        willSet (value) { self.willChangeValue(forKey: "isFinished"); }
+        didSet  (value) { self.didChangeValue(forKey: "isFinished"); }
         
     }
-    override var finished: Bool
+    override var isFinished: Bool
     {
         get { return self._finished; }
     }
     
-    override var concurrent: Bool
+    override var isConcurrent: Bool
     {
         get { return true; }
     }
     
-    override var asynchronous: Bool
+    override var isAsynchronous: Bool
     {
         get { return true; }
     }
@@ -114,12 +114,12 @@ class MessageOperation: NSOperation
     {
         // hang on, are we being dismissed?
         var controller = self.controller;
-        if controller.isBeingDismissed() {
+        if controller.isBeingDismissed {
             controller = controller.presentingViewController ?? controller
         }
         
         // handle cases where we are a nav bar
-        dispatch_async(dispatch_get_main_queue())
+        DispatchQueue.main.async
         {
             if let nav = controller as? UINavigationController
             {
@@ -132,14 +132,14 @@ class MessageOperation: NSOperation
             self.configureDismissal();
             
             // align it off screen
-            if let constraint = self.view.topConstraint, message = self.view.message
+            if let constraint = self.view.topConstraint, let message = self.view.message
             {
-                constraint.constant = CGRectGetHeight(self.view.frame) * -1;
+                constraint.constant = self.view.frame.height * -1;
                 controller.view.layoutIfNeeded();               // The second is to push the view off screen
                 constraint.constant = 0.0;
                 
                 // and animate in!
-                UIView.animateWithDuration(message.animationDuration, animations:
+                UIView.animate(withDuration: message.animationDuration, animations:
                 {
                     controller.view.layoutIfNeeded();           // And then animate back in
                 });
@@ -147,15 +147,15 @@ class MessageOperation: NSOperation
         }
     }
     
-    private func configureDismissal ()
+    fileprivate func configureDismissal ()
     {
         guard let message = self.view.message else { return; }
         
         // configure for automatic dismissal
-        if message.duration == .Automatic
+        if message.duration == .automatic
         {
-            let displayTime = message.displayTimeBase + (message.displayTimePerPixel * Double(CGRectGetHeight(self.view.frame)));
-            self.timer = NSTimer.scheduledTimerWithTimeInterval(displayTime, target: self, selector: #selector(MessageOperation.hide), userInfo: nil, repeats: false);
+            let displayTime = message.displayTimeBase + (message.displayTimePerPixel * Double(self.view.frame.height));
+            self.timer = Timer.scheduledTimer(timeInterval: displayTime, target: self, selector: #selector(MessageOperation.hide), userInfo: nil, repeats: false);
         }
         
         // tap to dismiss
@@ -181,10 +181,10 @@ class MessageOperation: NSOperation
             self.timer = nil;
         }
         
-        if let constraint = self.view.topConstraint, message = self.view.message, superview = self.view.superview
+        if let constraint = self.view.topConstraint, let message = self.view.message, let superview = self.view.superview
         {
-            constraint.constant = CGRectGetHeight(self.view.frame) * -1;
-            UIView.animateWithDuration(message.animationDuration, delay: 0.0, options: .CurveEaseInOut, animations:
+            constraint.constant = self.view.frame.height * -1;
+            UIView.animate(withDuration: message.animationDuration, delay: 0.0, options: UIViewAnimationOptions(), animations:
             {
                 superview.layoutIfNeeded();
 
