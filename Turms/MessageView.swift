@@ -63,7 +63,7 @@ class MessageView: UIView
         // Ourself
         if let superview = self.superview
         {
-            superview.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|", options: NSLayoutFormatOptions.alignAllCenterY, metrics: nil, views: ["view": self]));
+            superview.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|", options: NSLayoutConstraint.FormatOptions.alignAllCenterY, metrics: nil, views: ["view": self]));
             
             // top constraint
             let constraint = NSLayoutConstraint(item: self, attribute: .top, relatedBy: .equal, toItem: superview, attribute: .top, multiplier: 1.0, constant: 0.0);
@@ -72,12 +72,12 @@ class MessageView: UIView
         }
 
         // The Stack
-        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-left-[view]-right-|", options: NSLayoutFormatOptions.alignAllCenterY, metrics: self.padding.metricsDictionary(), views: ["view": stack]));
-        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-top-[view]-bottom-|", options: NSLayoutFormatOptions.alignAllCenterX, metrics: self.padding.metricsDictionary(), views: ["view": stack]));
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-left-[view]-right-|", options: NSLayoutConstraint.FormatOptions.alignAllCenterY, metrics: self.padding.metricsDictionary(), views: ["view": stack]));
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-top-[view]-bottom-|", options: NSLayoutConstraint.FormatOptions.alignAllCenterX, metrics: self.padding.metricsDictionary(), views: ["view": stack]));
 
         // The Background
-        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|", options: NSLayoutFormatOptions.alignAllCenterY, metrics: nil, views: ["view": background]));
-        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|", options: NSLayoutFormatOptions.alignAllCenterX, metrics: nil, views: ["view": background]));
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|", options: NSLayoutConstraint.FormatOptions.alignAllCenterY, metrics: nil, views: ["view": background]));
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|", options: NSLayoutConstraint.FormatOptions.alignAllCenterX, metrics: nil, views: ["view": background]));
         
         // our expected label width
         let rect = self.frame.isEmpty ? self.superview!.frame : self.frame;
@@ -126,8 +126,8 @@ extension MessageView
         label.textAlignment = .left;
         
         // compression resistence
-        label.setContentCompressionResistancePriority(UILayoutPriorityRequired, for: .vertical);
-        label.setContentCompressionResistancePriority(UILayoutPriorityRequired, for: .horizontal);
+        label.setContentCompressionResistancePriority(UILayoutPriority.required, for: .vertical);
+        label.setContentCompressionResistancePriority(UILayoutPriority.required, for: .horizontal);
         return label;
     }
     
@@ -146,8 +146,8 @@ extension MessageView
         label.textAlignment = .left;
         
         // compression resistence
-        label.setContentCompressionResistancePriority(UILayoutPriorityRequired, for: .vertical);
-        label.setContentCompressionResistancePriority(UILayoutPriorityRequired, for: .horizontal);
+        label.setContentCompressionResistancePriority(UILayoutPriority.required, for: .vertical);
+        label.setContentCompressionResistancePriority(UILayoutPriority.required, for: .horizontal);
 
         return label;
     }
@@ -155,7 +155,7 @@ extension MessageView
     fileprivate func messageStack (_ views: [UIView]) -> UIStackView
     {
         let stack = UIStackView(arrangedSubviews: views);
-        stack.setContentCompressionResistancePriority(UILayoutPriorityRequired, for: .vertical);
+        stack.setContentCompressionResistancePriority(UILayoutPriority.required, for: .vertical);
         stack.alignment = .leading;
         stack.distribution = .fill;
         stack.axis = .vertical;
@@ -203,7 +203,7 @@ extension UILabel
     {
         if let text = self.text
         {
-            let attributes = [ NSFontAttributeName: self.font ];
+            let attributes: [NSAttributedString.Key : Any] = [ NSAttributedString.Key.font: self.font as Any ];
             return text.boundingRect(with: CGSize(width: width, height: 2000), options: .usesLineFragmentOrigin, attributes: attributes, context: nil);
         }
         
