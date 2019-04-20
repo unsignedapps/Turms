@@ -23,19 +23,19 @@ open class MessageController: NSObject
         super.init();
     }
 
-    open static func show (_ message: Message, controller: UIViewController)
+    public static func show (_ message: Message, controller: UIViewController)
     {
         let view = MessageView(message: message);
         let op = MessageOperation(view: view, controller: controller);
         self.sharedInstance.queue.addOperation(op);
     }
     
-    open static func show (type: MessageType, message: String, controller: UIViewController)
+    public static func show (type: MessageType, message: String, controller: UIViewController)
     {
         self.show(Message(type: type, message: message), controller: controller);
     }
     
-    open static func show (_ type: MessageType, title: String, subtitle: String? = nil, duration: MessageDuration = .automatic, image: UIImage? = nil, position: MessagePosition = .navBarOverlay, dismissible: Bool = true, controller: UIViewController)
+    public static func show (_ type: MessageType, title: String, subtitle: String? = nil, duration: MessageDuration = .automatic, image: UIImage? = nil, position: MessagePosition = .navBarOverlay, dismissible: Bool = true, controller: UIViewController)
     {
         self.show(Message(type: type, title: title, subtitle: subtitle, duration: duration, image: image, position: position, dismissible: dismissible), controller: controller);
     }
@@ -173,7 +173,7 @@ class MessageOperation: Operation
         self.hide();
     }
     
-    func hide ()
+    @objc func hide ()
     {
         if let timer = self.timer
         {
@@ -184,7 +184,7 @@ class MessageOperation: Operation
         if let constraint = self.view.topConstraint, let message = self.view.message, let superview = self.view.superview
         {
             constraint.constant = self.view.frame.height * -1;
-            UIView.animate(withDuration: message.animationDuration, delay: 0.0, options: UIViewAnimationOptions(), animations:
+            UIView.animate(withDuration: message.animationDuration, delay: 0.0, options: UIView.AnimationOptions(), animations:
             {
                 superview.layoutIfNeeded();
 
